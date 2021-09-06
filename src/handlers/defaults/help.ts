@@ -15,4 +15,4 @@ const HelpIntentHandler: core.RequestHandler = {
   },
 };
 
-export default HelpIntentHandler;
+export { HelpIntentHandler };

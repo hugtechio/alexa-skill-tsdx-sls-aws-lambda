@@ -15,4 +15,4 @@ const CancelIntentHandler: core.RequestHandler = {
   },
 };
 
-export default CancelIntentHandler;
+export { CancelIntentHandler };

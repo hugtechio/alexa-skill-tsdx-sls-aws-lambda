@@ -15,4 +15,4 @@ const FallbackIntentHandler: core.RequestHandler = {
   },
 };
 
-export default FallbackIntentHandler;
+export { FallbackIntentHandler };

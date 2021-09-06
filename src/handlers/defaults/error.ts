@@ -14,4 +14,4 @@ const ErrorHandler: core.ErrorHandler = {
   },
 };
 
-export default ErrorHandler;
+export { ErrorHandler };

@@ -2,7 +2,7 @@ import * as core from 'ask-sdk-core';
 import * as model from 'ask-sdk-model';
 import { stop } from '../lib/validator';
 
-const CancelIntentHandler: core.RequestHandler = {
+const StopIntentHandler: core.RequestHandler = {
   canHandle: stop,
   handle(handlerInput: core.HandlerInput): model.Response {
     const speechText = 'Goodbye!';
@@ -15,4 +15,4 @@ const CancelIntentHandler: core.RequestHandler = {
   },
 };
 
-export default CancelIntentHandler;
+export { StopIntentHandler };

@@ -16,4 +16,4 @@ const SessionEndedRequestHandler: core.RequestHandler = {
   },
 };
 
-export default SessionEndedRequestHandler;
+export { SessionEndedRequestHandler };

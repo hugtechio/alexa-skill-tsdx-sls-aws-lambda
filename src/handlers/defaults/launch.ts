@@ -12,11 +12,11 @@ const LaunchRequestHandler: core.RequestHandler = {
       .speak(speechText)
       .reprompt(speechText)
       .withSimpleCard(
-        'Welcome to your SDK weather skill. Ask me the weather!',
+        'Thank you for using the order sample skill. What do you want to order?',
         speechText
       )
       .getResponse();
   },
 };
 
-export default LaunchRequestHandler;
+export { LaunchRequestHandler };
