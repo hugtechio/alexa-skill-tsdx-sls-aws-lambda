@@ -1,5 +1,5 @@
 const launchEvent = require('./events/launch.json')
-import handler from '../dist/index'
+import { handler } from '../dist/index'
 
 describe('#Launch', () => {
   it('handler should be return launch response', async () => {

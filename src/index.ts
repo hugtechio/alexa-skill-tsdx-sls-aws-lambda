@@ -20,4 +20,4 @@ const handler: Handler = async (event, context) => {
   return response;
 };
 
-export default handler;
+export { handler };
