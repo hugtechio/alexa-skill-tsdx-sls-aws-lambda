@@ -1,12 +1,19 @@
 # Alexa-skill-tsdx-sls-aws-lambda 
-This is a repository template to deploy only lambda function for alexa skill by Serverless Framework.
+This is a repository template to deploy only lambda function for alexa skill by [Serverless Framework](https://serverless.com/).
 
 ## Description
-This template is pre-build template for Alexa Skill by using TSDX and Serverless Framework.
+This template is pre-build template for Alexa Skill by using [TSDX](https://tsdx.io/) and Serverless Framework.
 
 ## Do the first!
 
 - rename service name from **alexa-skill-tsdx-sls-aws-lambda** to **YOUR_SERVICE_NAME** in **serverless.yml** and **package.json**
+- Create these S3 buckets for deployment (recommended use [AWS-CLI](https://aws.amazon.com/cli/))
+
+```bash
+aws s3api --bucket YOUR_SERVICE_NAME-layers --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
+aws s3api --bucket YOUR_SERVICE_NAME-deployment --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
+```
+
 - rename the **author** in **package.json**
 - Set the AWS Credential to GitHub secrets **(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)**
 
