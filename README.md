@@ -4,6 +4,12 @@ This is a repository template to deploy only lambda function for alexa skill by 
 ## Description
 This template is pre-build template for Alexa Skill by using TSDX and Serverless Framework.
 
+## Do the first!
+
+- rename service name from **alexa-skill-tsdx-sls-aws-lambda** to **YOUR_SERVICE_NAME** in **serverless.yml** and **package.json**
+- rename the **author** in **package.json**
+- Set the AWS Credential to GitHub secrets **(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)**
+
 ## Background
 In Alexa Conversations. Build time takes long. So sometimes when Building model and backend code together, like ask-cli, It is a bit inconvenience.
 
