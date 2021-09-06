@@ -1,0 +1,52 @@
+service: alexa-skill-tsdx-sls-aws-lambda
+
+custom:
+  stage:  ${opt:stage, self:provider.stage}
+  defaultProfile: default
+  defaultRegion: us-west-2
+  logRetentionInDays:
+    development: 30 
+    production: 90
+    default: 3
+  provisionedConcurrency:
+    production: 1 
+    default: 1
+  serverless-layers:
+    dependenciesPath: ./package.json
+    layersDeploymentBucket: alexa-skill-tsdx-sls-aws-lambda-layers
+    packageManager: yarn
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-prune-plugin
+  - serverless-layers
+  - serverless-deployment-bucket
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: development 
+  timeout: 30
+  memorySize: 128
+  logRetentionInDays: ${self:custom.logRetentionInDays.${self:custom.stage}, self:custom.logRetentionInDays.default}
+  region: ${opt:region, self:custom.defaultRegion}
+  environment:
+    STAGE: ${self:custom.stage}
+
+  stackTags:
+    STAGE: ${opt:stage, self:custom.stage}
+
+  deploymentBucket:
+    name: alexa-skill-tsdx-sls-aws-lambda-deployment
+    serverSideEncryption: AES256
+
+package:
+  include:
+    - dist/**/*
+  exclude:
+    - '*/**'
+
+functions:
+  handler:
+    handler: dist/index.handler 
+    memorySize: ${self:custom.memorySize}

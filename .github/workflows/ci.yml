@@ -1,0 +1,47 @@
+name: CI
+on: [push]
+
+jobs:
+  build:
+    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ['14.x']
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test --ci --coverage --maxWorkers=2
+
+      - name: Build
+        run: yarn build
+
+      - name: Install serverless(only pushing to development branch or tagging as versioning)
+        if: ${{ github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/development') || startsWith(github.ref, 'refs/heads/main')) }}
+        run: >
+          sudo npm install -g serverless &&
+          serverless config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: DeployDevelopment
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/development') }}
+        run: yarn deploy:dev
+
+      - name: DeployProduction
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/main') }}
+        run: yarn deploy:prod
